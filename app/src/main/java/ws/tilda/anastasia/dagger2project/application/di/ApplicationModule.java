@@ -12,6 +12,7 @@ import ws.tilda.anastasia.dagger2project.BuildConfig;
 @Module
 public class ApplicationModule {
 
+    @ApplicationScope
     @Provides
     Retrofit retrofit(GsonConverterFactory gsonConverterFactory) {
         return new Retrofit.Builder()
