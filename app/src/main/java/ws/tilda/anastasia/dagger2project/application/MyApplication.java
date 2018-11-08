@@ -2,6 +2,8 @@ package ws.tilda.anastasia.dagger2project.application;
 
 import android.app.Application;
 
+import javax.inject.Inject;
+
 import retrofit2.Retrofit;
 import ws.tilda.anastasia.dagger2project.application.di.ApplicationComponent;
 import ws.tilda.anastasia.dagger2project.application.di.ApplicationModule;
@@ -11,6 +13,9 @@ public class MyApplication extends Application {
 
     ApplicationComponent component;
 
+    @Inject
+    Retrofit retrofit;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -19,6 +24,8 @@ public class MyApplication extends Application {
                 .applicationModule(new ApplicationModule())
                 .build();
 
-        Retrofit retrofit = component.getRetrofit();
+        component.inject(this);
+
+
     }
 }

@@ -1,11 +1,11 @@
 package ws.tilda.anastasia.dagger2project.application.di;
 
 import dagger.Component;
-import retrofit2.Retrofit;
+import ws.tilda.anastasia.dagger2project.application.MyApplication;
 
 @ApplicationScope
 @Component(modules = {ApplicationModule.class})
 public interface ApplicationComponent {
 
-    Retrofit getRetrofit();
+    void inject(MyApplication application);
 }
