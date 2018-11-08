@@ -1,5 +1,8 @@
 package ws.tilda.anastasia.dagger2project.application.di;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
@@ -19,7 +22,13 @@ public class ApplicationModule {
     }
 
     @Provides
-    GsonConverterFactory gsonConverterFactory() {
-        return null;
+    GsonConverterFactory gsonConverterFactory(Gson gson) {
+        return GsonConverterFactory.create(gson);
+    }
+
+    @Provides
+    Gson gson() {
+        GsonBuilder builder = new GsonBuilder();
+        return builder.create();
     }
 }
