@@ -4,7 +4,6 @@ import android.app.Application;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import javax.inject.Inject;
 
@@ -13,8 +12,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ws.tilda.anastasia.dagger2project.BuildConfig;
 import ws.tilda.anastasia.dagger2project.application.di.ApplicationComponent;
+import ws.tilda.anastasia.dagger2project.application.di.ApplicationModule;
+import ws.tilda.anastasia.dagger2project.application.di.DaggerApplicationComponent;
 import ws.tilda.anastasia.dagger2project.model.CredentialsManager;
 import ws.tilda.anastasia.dagger2project.model.CredentialsObject;
 import ws.tilda.anastasia.dagger2project.model.RestService;
@@ -36,6 +36,10 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        component = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule())
+                .build();
+        component.inject(this);
 
         RestService restService = credentialsManager.getService(retrofit);
 
